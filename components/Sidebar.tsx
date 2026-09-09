@@ -1,58 +1,79 @@
 "use client";
 
-import Sidebar from "@/components/Sidebar";
+import {
+  LayoutDashboard,
+  Users,
+  Megaphone,
+  FileText,
+  Inbox,
+  Clock,
+  BarChart3,
+  ShieldCheck,
+  Settings,
+} from "lucide-react";
 
-const stats = [
-  { title: "Total Leads", value: "0", color: "#2563eb" },
-  { title: "Valid Emails", value: "0", color: "#16a34a" },
-  { title: "Active Campaigns", value: "0", color: "#7c3aed" },
-  { title: "Emails Sent", value: "0", color: "#0891b2" },
-  { title: "Replies", value: "0", color: "#ea580c" },
-  { title: "Follow-ups Due", value: "0", color: "#dc2626" },
+const menuItems = [
+  { name: "Dashboard", icon: LayoutDashboard },
+  { name: "Leads", icon: Users },
+  { name: "Campaigns", icon: Megaphone },
+  { name: "Templates", icon: FileText },
+  { name: "Inbox", icon: Inbox },
+  { name: "Follow-ups", icon: Clock },
+  { name: "Reports", icon: BarChart3 },
+  { name: "Suppression", icon: ShieldCheck },
+  { name: "Settings", icon: Settings },
 ];
 
-export default function HomePage() {
+export default function Sidebar() {
   return (
-    <div className="dashboard">
-      <Sidebar />
+    <aside
+      style={{
+        width: "250px",
+        minHeight: "100vh",
+        background: "#0f172a",
+        color: "#fff",
+        padding: "24px 16px",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "22px",
+          fontWeight: "700",
+          marginBottom: "32px",
+          padding: "0 12px",
+        }}
+      >
+        Outreach CRM
+      </div>
 
-      <main className="main-content">
-        <div className="content-wrapper">
-          <header className="page-header">
-            <h1>Dashboard</h1>
-            <p>Welcome to your Outreach CRM</p>
-          </header>
+      <nav>
+        {menuItems.map((item) => {
+          const Icon = item.icon;
 
-          <section className="stats-grid">
-            {stats.map((stat) => (
-              <div className="stat-card" key={stat.title}>
-                <div
-                  className="stat-dot"
-                  style={{ background: stat.color }}
-                />
-                <p>{stat.title}</p>
-                <h2>{stat.value}</h2>
-              </div>
-            ))}
-          </section>
-
-          <section className="content-grid">
-            <div className="panel">
-              <h2>Campaign Performance</h2>
-              <div className="empty-state">
-                No campaign data yet.
-              </div>
+          return (
+            <div
+              key={item.name}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                padding: "12px",
+                marginBottom: "4px",
+                borderRadius: "8px",
+                color:
+                  item.name === "Dashboard" ? "#fff" : "#94a3b8",
+                background:
+                  item.name === "Dashboard"
+                    ? "#2563eb"
+                    : "transparent",
+              }}
+            >
+              <Icon size={19} />
+              <span>{item.name}</span>
             </div>
-
-            <div className="panel">
-              <h2>Recent Activity</h2>
-              <div className="empty-state">
-                No recent activity.
-              </div>
-            </div>
-          </section>
-        </div>
-      </main>
-    </div>
+          );
+        })}
+      </nav>
+    </aside>
   );
 }
